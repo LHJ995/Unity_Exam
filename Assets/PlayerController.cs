@@ -4,49 +4,73 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private float Speed;
-    private Vector3 Movement;
+    private float Speed; // 움직이는 속도
+    private Vector3 Movement; // 움직임 저장하는 벡터
+
+    // [상태체크]
     private bool OnAttack;
     private bool OnHit;
     private bool OnJump;
     private bool OnSlide;
 
+    // 플레이어의 SpriteRenderer 구성요소 받아오기
+    private SpriteRenderer spriteRenderer;
+
+    // 플레이어의 Animator 구성요소 받아오기
     public Animator animator;
 
-    // Start is called before the first frame update
+    // 복사할 총알 원본
+    public GameObject BulletPrefab;
+    // 복제된 총알의 저장 공간
+    private List<GameObject> Bullets = new List<GameObject>();
+
+    // 플레이어가 마지막으로 바라본 방향
+    private float Direction;
+
+    private void Awake()
+    {
+        // 위에 선언된 구성요소 받아오기
+        animator = this.GetComponent<Animator>();
+        spriteRenderer = this.GetComponent<SpriteRenderer>();
+    }
+
     void Start()
     {
-        Speed = 5.0f;
+        // 속도 초기화
+        Speed = 3.0f;
 
-        animator = this.GetComponent<Animator>();
-
+        // 상태 false로 초기화
         OnAttack = false;
         OnHit = false;
         OnSlide = false;
+
+        // 초기 바라보는 상태
+        Direction = 1.0f;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // 입력값 체크
         float Hor = Input.GetAxisRaw("Horizontal");
         float Ver = Input.GetAxis("Vertical");
-        // Vector3 flipmove = Vector3.zero;
 
+        spriteRenderer.flipX = (Hor < 0) ? true : false;
+
+        // Hor이 0이면 멈춰있는 상태 이므로 예외처리
+        if (Hor != 0)
+            Direction = Hor;
+
+        // 플레이어가 바라보고 있는 방향에 따라 이미지 설정
+        if (Direction < 0)
+            spriteRenderer.flipX = true;
+        else if (Direction > 0)
+            spriteRenderer.flipX = false;
+
+        // 입력받은 값으로 플레이어 이동
         Movement = new Vector3(Hor * Time.deltaTime * Speed, Ver * Time.deltaTime * Speed, 0.0f);
 
-        // if (Input.GetAxisRaw("Horizontal") < 0)
-        // {
-        //     flipmove = Vector3.left;
-        //     transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-        // }
-        // else if (Input.GetAxisRaw("horizontal") > 0)
-        // {
-        //     flipmove = Vector3.right;
-        //     transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-        // }
-
-
-        if (Input.GetKey(KeyCode.Z))
+        // 이벤트 발생
+        if (Input.GetKeyDown(KeyCode.Z))
             onAttack();
 
         if (Input.GetKey(KeyCode.Space))
@@ -74,7 +98,18 @@ public class PlayerController : MonoBehaviour
     private void SetAttack()
     {
         OnAttack = false;
-    } 
+    }
+
+    private void Thrrow()
+    {
+        GameObject obj = Instantiate(BulletPrefab);
+        obj.transform.position = transform.position;
+        BulletController Controller = obj.AddComponent<BulletController>();
+
+        Controller.Direction = new Vector3(Direction, 0, 0);
+
+        Bullets.Add(obj);
+    }
 
     void onHit()
     {
