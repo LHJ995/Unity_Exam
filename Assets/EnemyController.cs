@@ -4,25 +4,65 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    private int HP;
-    // Start is called before the first frame update
-    void Start()
+    public int HP;
+
+    public Animator animator;
+
+    private bool OnHit;
+    private bool OnDead;
+
+    private void Awake()
     {
-        HP = 100;
+        animator = this.GetComponent<Animator>();
     }
 
-    // Update is called once per frame
+    void Start()
+    {
+        OnHit = false;
+        OnDead = false;
+    }
+
     void Update()
     {
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        HP -= 25;
-        Debug.Log("Hit");
+        if (collision.tag == "Bullet")
+        {
+            --HP;
+            onHit();
+        }
 
         if (HP == 0)
-            Destroy(this.gameObject);
+        {
+            onDead();
+
+            Destroy(this.gameObject, 1);
+        }
+    }
+
+    void onHit()
+    {
+        if (OnHit)
+            return;
+
+        OnHit = true;
+        animator.SetTrigger("Hit");
+    }
+
+    private void SetHit()
+    {
+        OnHit = false;
+    }
+
+    void onDead()
+    {
+        if (OnDead)
+            return;
+
+        OnDead = true;
+        animator.SetTrigger("Dead");
     }
 }

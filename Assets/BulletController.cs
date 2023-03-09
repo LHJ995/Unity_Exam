@@ -30,6 +30,8 @@ public class BulletController : MonoBehaviour
         transform.position += Direction * Speed * Time.deltaTime;
 
         transform.eulerAngles += new Vector3(0, 0, -2);
+
+        Destroy(this.gameObject, 3);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
