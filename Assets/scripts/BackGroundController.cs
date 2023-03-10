@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class BackGroundController : MonoBehaviour
 {
+    // private SpriteRenderer spriterenderer;
+    // private Sprite sprite;
     // public float Speed;
     // 
     // public GameObject player;
     // private Vector3 movement;
 
+    private void Awake()
+    {
+        // spriterenderer = GetComponent<SpriteRenderer>();
+    }
+
     void Start()
     {
+        
         // player = GameObject.Find("Player").gameObject;
     }
 
