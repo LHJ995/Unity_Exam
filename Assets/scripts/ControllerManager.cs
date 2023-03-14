@@ -13,9 +13,6 @@ public class ControllerManager
         return Instance;
     }
 
-    public bool DirLeft;
-    public bool DirRight;
-
     private ControllerManager()
     {
 

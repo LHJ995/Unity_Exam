@@ -314,7 +314,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 071286177708d4642890074f5fbee301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1561437726}
+  playerTransform: {fileID: 1561437727}
+  cameraPosition: {x: 0, y: 0, z: 0}
+  center: {x: 0, y: 0}
+  mapSize: {x: 0, y: 0}
+  cameraMoveSpeed: 0
 --- !u!1 &1561437726
 GameObject:
   m_ObjectHideFlags: 0
