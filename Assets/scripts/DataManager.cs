@@ -9,13 +9,13 @@ public class DataManager : MonoBehaviour
     [System.Serializable]
     class DataForm
     {
-        public string Name;
-        public string Age;
+        public string name;
+        public string age;
 
         DataForm(string _name,string _age)
         {
-            Name = _name;
-            Age = _age;
+            this.name = _name;
+            this.age = _age;
         }
     }
 
