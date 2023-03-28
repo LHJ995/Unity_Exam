@@ -16,6 +16,7 @@ public class EnemyController : MonoBehaviour
 
     private bool OnHit;
     private bool OnDead;
+    private bool Alive;
 
     private void Awake()
     {
@@ -27,22 +28,26 @@ public class EnemyController : MonoBehaviour
     {
         OnHit = false;
         OnDead = false;
+        Alive = true;
     }
 
     void Update()
     {
-        transform.position = Vector3.MoveTowards
+        if(Alive)
+        {
+            transform.position = Vector3.MoveTowards
             (transform.position, playerTransform.position, Time.deltaTime * Speed);
 
-        look = playerTransform.position - transform.position;
+            look = playerTransform.position - transform.position;
 
-        if (look.x < 0)
-        {
-            spriteRenderer.flipX = false;
-        }
-        else
-        {
-            spriteRenderer.flipX = true;
+            if (look.x < 0)
+            {
+                spriteRenderer.flipX = false;
+            }
+            else
+            {
+                spriteRenderer.flipX = true;
+            }
         }
     }
 
@@ -57,6 +62,8 @@ public class EnemyController : MonoBehaviour
         if (HP == 0)
         {
             onDead();
+
+            Alive = false;
 
             Destroy(this.gameObject, 1);
         }
