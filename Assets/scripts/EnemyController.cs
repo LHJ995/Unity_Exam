@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    [SerializeField]
+    Transform playerTransform;
+
     public int HP;
+    public float Speed;
+    private Vector2 look;
 
     public Animator animator;
+    private SpriteRenderer spriteRenderer;
 
     private bool OnHit;
     private bool OnDead;
@@ -14,6 +20,7 @@ public class EnemyController : MonoBehaviour
     private void Awake()
     {
         animator = this.GetComponent<Animator>();
+        spriteRenderer = this.GetComponent<SpriteRenderer>();
     }
 
     void Start()
@@ -24,7 +31,19 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
+        transform.position = Vector3.MoveTowards
+            (transform.position, playerTransform.position, Time.deltaTime * Speed);
 
+        look = playerTransform.position - transform.position;
+
+        if (look.x < 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else
+        {
+            spriteRenderer.flipX = true;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private float Speed; // 움직이는 속도
     private Vector3 Movement; // 움직임 저장하는 벡터
+    public Vector2 MoveEnd;
 
     // [상태체크]
     private bool OnAttack;
@@ -84,6 +85,15 @@ public class PlayerController : MonoBehaviour
 
         animator.SetFloat("Speed", Hor);
         transform.position += Movement;
+        transform.localPosition = MaxPosition(transform.localPosition);
+    }
+
+    public Vector3 MaxPosition(Vector3 position)
+    {
+        return new Vector3
+            (
+                Mathf.Clamp(position.x, -MoveEnd.x, MoveEnd.x), Mathf.Clamp(position.y, -MoveEnd.y, MoveEnd.y), 0.0f
+                );
     }
 
     void onAttack()

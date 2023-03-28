@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour
         width = height * Screen.width / Screen.height;
     }
 
-    void FixedUpdate()
+    void LateUpdate()
     {
         LimitCameraArea();
     }
@@ -35,13 +35,13 @@ public class CameraController : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position,
                                           playerTransform.position + cameraPosition,
                                           Time.deltaTime * cameraMoveSpeed);
-        // float lx = mapSize.x - width;
-        // float clampX = Mathf.Clamp(transform.position.x, -lx + center.x, lx + center.x);
-        // 
-        // float ly = mapSize.y - height;
-        // float clampY = Mathf.Clamp(transform.position.y, -ly + center.y, ly + center.y);
-        // 
-        // transform.position = new Vector3(clampX, clampY, 1f);
+        float lx = mapSize.x - width;
+        float clampX = Mathf.Clamp(transform.position.x, -lx + center.x, lx + center.x);
+        
+        float ly = mapSize.y - height;
+        float clampY = Mathf.Clamp(transform.position.y, -ly + center.y, ly + center.y);
+        
+        transform.position = new Vector3(clampX, clampY, -5.8f);
     }
 
     private void OnDrawGizmos()
