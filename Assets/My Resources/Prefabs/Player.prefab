@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5960131712117386003}
   - component: {fileID: 5960131712117386002}
   - component: {fileID: 5960131712117386001}
+  - component: {fileID: -6196102854811726981}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -121,3 +122,19 @@ MonoBehaviour:
   MoveEnd: {x: 21, y: 1.1}
   animator: {fileID: 0}
   BulletPrefab: {fileID: 2460082341761119155, guid: d86c8ad31a52eb54fb5f009506edfc05, type: 3}
+--- !u!58 &-6196102854811726981
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5960131712117386029}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.04, y: -0.04}
+  serializedVersion: 2
+  m_Radius: 0.23

@@ -4,72 +4,35 @@ using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
 {
-    private static EnemySpawn instance = null;
+    private int SpawnCount;
+    private float RandomRange;
 
-    public static EnemySpawn GetInstance
+    public GameObject Enemy;
+    private List<GameObject> EnemyList = new List<GameObject>();
+
+    float time;
+    void Start()
     {
-        get
-        {
-            if (instance == null)
-                return null;
-            return instance;
-        }
+
     }
 
-    private GameObject Parent;
-    private GameObject Prefab;
-
-    public float Distance;
-
-    private void Awake()
+    private void Update()
     {
-        if (instance == null)
+        SpawnCount = (int)GameObject.FindGameObjectsWithTag("Enemy").Length;
+        time += Time.deltaTime;
+
+        if (time > 5)
         {
-            instance = this;
+            time = 0;
+            if (SpawnCount < 3)
+            {
+                Vector3 spawnPos = new Vector3(24.58f, RandomRange = Random.Range(-1.35f, 0.5f), 0.0f);
 
-            Distance = 0.0f;
-
-            // ** 생성되는 Enemy를 담아둘 상위 객체
-            Parent = new GameObject("SpawnPoint");
-
-            // ** Enemy로 사용할 원형 객체
-            Prefab = Resources.Load("Prefabs/Enemy") as GameObject;
+                //원본, 위치, 회전값을 매개변수로 받아 오브젝트 복제
+                GameObject instance = Instantiate(Enemy, spawnPos, Quaternion.identity);
+                EnemyList.Add(instance); //오브젝트 관리를 위해 리스트에 add
+            }
         }
-    }
-
-    private IEnumerator Start()
-    {
-        while (true)
-        {
-            // ** Enemy 원형객체를 복제한다.
-            GameObject Obj = Instantiate(Prefab);
-
-            // ** Enemy 작동 스크립트 포함.
-            //Obj.AddComponent<EnemyController>();
-
-            // ** 클론의 위치를 초기화.
-            Obj.transform.position = new Vector3(
-                24.58f, Random.Range(1.475f, 0.52f), 0.0f);
-
-            Obj.transform.position = new Vector3(
-                 24.58f, -0.497f, 0.0f);
-
-            // ** 클론의 이름 초기화.
-            Obj.transform.name = "Enemy";
-
-            // ** 클론의 계층구조 설정.
-            Obj.transform.SetParent(Parent.transform);
-
-            // ** 1.5초 휴식.
-            yield return new WaitForSeconds(1.5f);
-        }
-    }
-
-    void Update()
-    {
-        if (ControllerManager.GetInstance().DirRight)
-        {
-            Distance += Input.GetAxisRaw("Horizontal") * Time.deltaTime;
-        }
+        
     }
 }

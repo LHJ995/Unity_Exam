@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private float Speed; // 움직이는 속도
+    private int HP;
     private Vector3 Movement; // 움직임 저장하는 벡터
     public Vector2 MoveEnd;
 
@@ -47,6 +48,8 @@ public class PlayerController : MonoBehaviour
 
         // 초기 바라보는 상태
         Direction = 1.0f;
+
+        HP = 5;
     }
 
     void Update()
@@ -80,9 +83,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
             onSlide();
 
-        if (Input.GetKey(KeyCode.T))
-            onHit();
-
         animator.SetFloat("Speed", Hor);
         transform.position += Movement;
         transform.localPosition = MaxPosition(transform.localPosition);
@@ -94,6 +94,19 @@ public class PlayerController : MonoBehaviour
             (
                 Mathf.Clamp(position.x, -MoveEnd.x, MoveEnd.x), Mathf.Clamp(position.y, -MoveEnd.y, MoveEnd.y), 0.0f
                 );
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Enemy")
+        {
+            onHit();
+            HP--;
+        }
+        if (HP == 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     void onAttack()

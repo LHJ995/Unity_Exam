@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f600ee06af4e5b245ad45a2f3e2f1dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 5960131712117386028, guid: 3380337f24070734c96ee2974415a591, type: 3}
+  playerTransform: {fileID: 0}
   HP: 4
   Speed: 0.75
   animator: {fileID: 0}

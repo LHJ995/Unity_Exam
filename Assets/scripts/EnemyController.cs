@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour
 
     public int HP;
     public float Speed;
-    private Vector2 look;
+    private Vector3 look;
 
     public Animator animator;
     private SpriteRenderer spriteRenderer;
@@ -29,6 +29,8 @@ public class EnemyController : MonoBehaviour
         OnHit = false;
         OnDead = false;
         Alive = true;
+
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void Update()
@@ -37,10 +39,10 @@ public class EnemyController : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards
             (transform.position, playerTransform.position, Time.deltaTime * Speed);
-
+           
             look = playerTransform.position - transform.position;
 
-            if (look.x < 0)
+            if (look.x > 0)
             {
                 spriteRenderer.flipX = false;
             }
