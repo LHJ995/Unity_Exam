@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -105,6 +106,7 @@ public class PlayerController : MonoBehaviour
         }
         if (HP == 0)
         {
+            Time.timeScale = 0;
             Destroy(this.gameObject);
         }
     }

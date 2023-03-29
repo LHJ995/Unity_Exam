@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class EnemyController : MonoBehaviour
 
     public Animator animator;
     private SpriteRenderer spriteRenderer;
+    private BoxCollider2D body;
 
     private bool OnHit;
     private bool OnDead;
@@ -22,6 +24,7 @@ public class EnemyController : MonoBehaviour
     {
         animator = this.GetComponent<Animator>();
         spriteRenderer = this.GetComponent<SpriteRenderer>();
+        body = this.GetComponent<BoxCollider2D>();
     }
 
     void Start()
@@ -61,12 +64,12 @@ public class EnemyController : MonoBehaviour
             onHit();
         }
 
-        if (HP == 0)
+        if (HP <= 0)
         {
             onDead();
-
             Alive = false;
-
+            EnemySpawn.Count++;
+            Destroy(body);
             Destroy(this.gameObject, 1);
         }
     }

@@ -1,19 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemySpawn : MonoBehaviour
 {
     private int SpawnCount;
     private float RandomRange;
+    public static int Count = 0;
 
     public GameObject Enemy;
     private List<GameObject> EnemyList = new List<GameObject>();
+    private Text MobCount;
 
     float time;
-    void Start()
-    {
 
+    void Awake()
+    {
+        MobCount = Text.FindObjectOfType<Text>();
     }
 
     private void Update()
