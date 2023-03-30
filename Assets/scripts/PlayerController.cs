@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     private float Speed; // 움직이는 속도
-    private int HP;
+    public static int HP = 5;
     private Vector3 Movement; // 움직임 저장하는 벡터
     public Vector2 MoveEnd;
 
@@ -49,8 +49,6 @@ public class PlayerController : MonoBehaviour
 
         // 초기 바라보는 상태
         Direction = 1.0f;
-
-        HP = 5;
     }
 
     void Update()

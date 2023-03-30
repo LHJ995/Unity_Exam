@@ -25,10 +25,10 @@ public class EnemySpawn : MonoBehaviour
         SpawnCount = (int)GameObject.FindGameObjectsWithTag("Enemy").Length;
         time += Time.deltaTime;
 
-        if (time > 5)
+        if (time > 3)
         {
             time = 0;
-            if (SpawnCount < 3)
+            if (SpawnCount < 5)
             {
                 Vector3 spawnPos = new Vector3(24.58f, RandomRange = Random.Range(-1.35f, 0.5f), 0.0f);
 

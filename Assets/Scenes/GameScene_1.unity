@@ -788,7 +788,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 633, y: 312}
+  m_AnchoredPosition: {x: 648, y: 308}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &971421900
@@ -955,6 +955,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 268738728}
   Mob: {fileID: 971421900}
+  HP_1: {fileID: 820953339}
+  HP_2: {fileID: 919701690}
+  HP_3: {fileID: 2128384451}
+  HP_4: {fileID: 1791100402}
+  HP_5: {fileID: 2102817643}
 --- !u!224 &1122435562
 RectTransform:
   m_ObjectHideFlags: 0
