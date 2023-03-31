@@ -28,13 +28,20 @@ public class EnemySpawn : MonoBehaviour
         if (time > 3)
         {
             time = 0;
-            if (SpawnCount < 5)
+            if (Random.Range(0, 2) == 1 && SpawnCount < 10)
             {
-                Vector3 spawnPos = new Vector3(24.58f, RandomRange = Random.Range(-1.35f, 0.5f), 0.0f);
+                Vector3 spawnPos = new Vector3(24.26f, RandomRange = Random.Range(-1.35f, 0.5f), 0.0f);
 
                 //원본, 위치, 회전값을 매개변수로 받아 오브젝트 복제
                 GameObject instance = Instantiate(Enemy, spawnPos, Quaternion.identity);
                 EnemyList.Add(instance); //오브젝트 관리를 위해 리스트에 add
+            }
+            if (Random.Range(0, 2) == 0 && SpawnCount < 10)
+            {
+                Vector3 spawnPos = new Vector3(-24.26f, RandomRange = Random.Range(-1.35f, 0.5f), 0.0f);
+
+                GameObject instance = Instantiate(Enemy, spawnPos, Quaternion.identity);
+                EnemyList.Add(instance);
             }
         }
         
