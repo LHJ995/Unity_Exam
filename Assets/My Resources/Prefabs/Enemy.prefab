@@ -128,7 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
   HP: 4
-  Speed: 0.75
+  Speed: 1.5
   animator: {fileID: 0}
 --- !u!50 &1155451996183189778
 Rigidbody2D:
