@@ -28,7 +28,8 @@ public class EnemySpawn : MonoBehaviour
         if (time > 3)
         {
             time = 0;
-            if (Random.Range(0, 2) == 1 && SpawnCount < 10)
+            int rand = Random.Range(0, 2);
+            if (rand == 1 && SpawnCount < 10)
             {
                 Vector3 spawnPos = new Vector3(24.26f, RandomRange = Random.Range(-1.35f, 0.5f), 0.0f);
 
@@ -36,7 +37,7 @@ public class EnemySpawn : MonoBehaviour
                 GameObject instance = Instantiate(Enemy, spawnPos, Quaternion.identity);
                 EnemyList.Add(instance); //오브젝트 관리를 위해 리스트에 add
             }
-            if (Random.Range(0, 2) == 0 && SpawnCount < 10)
+            if (rand == 0 && SpawnCount < 10)
             {
                 Vector3 spawnPos = new Vector3(-24.26f, RandomRange = Random.Range(-1.35f, 0.5f), 0.0f);
 
