@@ -123,13 +123,35 @@ public class PlayerController : MonoBehaviour
         OnAttack = false;
     }
 
-    private void Thrrow()
+    private void ThrrowUp()
+    {
+        GameObject obj = Instantiate(BulletPrefab);
+        obj.transform.position = transform.position;
+        BulletController Controller = obj.AddComponent<BulletController>();
+
+        Controller.Direction = new Vector3(Direction, 0.25f, 0);
+
+        Bullets.Add(obj);
+    }
+
+    private void ThrrowMid()
     {
         GameObject obj = Instantiate(BulletPrefab);
         obj.transform.position = transform.position;
         BulletController Controller = obj.AddComponent<BulletController>();
 
         Controller.Direction = new Vector3(Direction, 0, 0);
+
+        Bullets.Add(obj);
+    }
+
+    private void ThrrowDown()
+    {
+        GameObject obj = Instantiate(BulletPrefab);
+        obj.transform.position = transform.position;
+        BulletController Controller = obj.AddComponent<BulletController>();
+
+        Controller.Direction = new Vector3(Direction, -0.25f, 0);
 
         Bullets.Add(obj);
     }
