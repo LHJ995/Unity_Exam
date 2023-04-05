@@ -19,5 +19,12 @@ public class SceneController : MonoBehaviour
     public void OnClickExit()
     {
         Debug.Log("Exit");
+        Application.Quit();
+    }
+
+    public void mainmenu()
+    {
+        Debug.Log("mainmenu");
+        SceneManager.LoadScene("MainScene");
     }
 }
