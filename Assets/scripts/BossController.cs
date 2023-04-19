@@ -9,7 +9,7 @@ public class BossController : MonoBehaviour
     [SerializeField]
     SpriteRenderer spriteRenderer;
     [SerializeField]
-    BoxCollider2D body;
+    CircleCollider2D body;
     [SerializeField]
     Transform playerTransform;
 
@@ -26,7 +26,7 @@ public class BossController : MonoBehaviour
     {
         animator = this.GetComponent<Animator>();
         spriteRenderer = this.GetComponent<SpriteRenderer>();
-        body = this.GetComponent<BoxCollider2D>();
+        body = this.GetComponent<CircleCollider2D>();
     }
 
     void Start()
@@ -37,6 +37,7 @@ public class BossController : MonoBehaviour
         Ondead = false;
 
         Speed = 1.0f;
+        HP = 10;
 
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
@@ -49,7 +50,6 @@ public class BossController : MonoBehaviour
             (transform.position, playerTransform.position, Time.deltaTime * Speed);
 
             look = playerTransform.position - transform.position;
-            OnWalk();
 
             if (look.x > 0)
             {
@@ -59,6 +59,24 @@ public class BossController : MonoBehaviour
             {
                 spriteRenderer.flipX = true;
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Bullet")
+        {
+            --HP;
+            OnHit();
+        }
+
+        if (HP <= 0)
+        {
+            OnDead();
+            Alive = false;
+            EnemySpawn.Count += 5;
+            Destroy(body);
+            Destroy(this.gameObject, 1.15f);
         }
     }
 
