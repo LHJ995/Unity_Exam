@@ -89,7 +89,7 @@ public class BossController : MonoBehaviour
         animator.SetTrigger("Walk");
     }
 
-    void setwalk()
+    void Setwalk()
     {
         Onwalk = false;
     }
@@ -103,7 +103,7 @@ public class BossController : MonoBehaviour
         animator.SetTrigger("Hit");
     }
 
-    void sethit()
+    void Sethit()
     {
         Onhit = false;
     }
